@@ -3,6 +3,7 @@ package br.com.fiap.space.model.domain.entidades;
 import br.com.fiap.space.model.domain.valueObject.Coordenadas;
 import br.com.fiap.space.model.domain.valueObject.NivelDeEnergia;
 
+
 public class SondaExploradora extends Sonda {
     private double alcanceSensor;
 
@@ -17,6 +18,7 @@ public class SondaExploradora extends Sonda {
 
     @Override
     protected void processarAtividadeEspecifica() {
+
         System.out.println("[SCANNER ACTIVATED] Sonda Exploradora " + idString +
                 " mapeando terreno em um raio de " + alcanceSensor + " metros.");
     }

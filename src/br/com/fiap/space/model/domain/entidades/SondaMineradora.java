@@ -1,17 +1,22 @@
 package br.com.fiap.space.model.domain.entidades;
 
+import br.com.fiap.space.model.domain.enumeration.Recurso;
+import br.com.fiap.space.model.domain.exception.CargaExcedidaException;
 import br.com.fiap.space.model.domain.valueObject.Compartimento;
 import br.com.fiap.space.model.domain.valueObject.NivelDeEnergia;
 import br.com.fiap.space.model.domain.valueObject.Coordenadas;
 
+import java.util.Random;
+
 public class SondaMineradora extends Sonda{
 
     private Compartimento compartimento;
+    private final Random random;
 
     public SondaMineradora(String idString, NivelDeEnergia nivelDeEnergia, Coordenadas coordenadasAtual, Compartimento compartimento){
         super(idString, nivelDeEnergia, coordenadasAtual);
         this.compartimento = compartimento;
-
+        this.random = new Random();
     }
 
     public Compartimento getCompartimento() {
@@ -20,19 +25,30 @@ public class SondaMineradora extends Sonda{
 
     @Override
     protected void processarAtividadeEspecifica() {
-        System.out.println("[PERFURATRIZ ATIVADA] Sonda Mineradora " + idString + " iniciando extração de minério...");
 
-        double novoPeso = this.compartimento.getPesoAtual() + 5.0;
 
-        this.compartimento = new Compartimento(novoPeso, this.compartimento.getPesoMaximo());
+        Recurso[] recursosPossiveis = Recurso.values();
+        int indiceSorteado = random.nextInt(recursosPossiveis.length);
+        // O recurso encontrado passa a ser o sorteado
+        Recurso recursoEncontrado = recursosPossiveis[indiceSorteado];
 
-        System.out.println("[PRODUÇÃO] 5.0kg extraídos. Status da Carga: " + this.compartimento);
+        System.out.println("[PERFURATRIZ] Sonda " + getIdString() + " minerando: " + recursoEncontrado.getNomeExibicao());
+
+        double pesoExtraido = recursoEncontrado.getPesoUnidade();
+        double novoPesoTotal = this.compartimento.getPesoAtual() + pesoExtraido;
+
+        // Validação de Sobrecarga (Opcional, caso queira travar se passar do peso máximo)
+        if (novoPesoTotal > this.compartimento.getPesoMaximo()) {
+            throw new CargaExcedidaException("Falha de Operação: Extração abortada! Coletar +" + pesoExtraido + "kg de " + recursoEncontrado.getNomeExibicao() + " excederia o limite máximo do compartimento (" + this.compartimento.getPesoMaximo() + "kg).");
+        }
+
+        this.compartimento = new Compartimento(novoPesoTotal, this.compartimento.getPesoMaximo());
+
+        System.out.println("[PRODUÇÃO] +" + pesoExtraido + "kg coletados. Carga total: " + this.compartimento);
     }
 
     @Override
     public void enviarRelatorio() {
-        System.out.println("[RELATÓRIO DE EXTRAÇÃO] Sonda " + idString +
-                " confirma retenção de carga na coordenada " + getCoordenadaAtual() +
-                ". Pronto para transporte.");
+        System.out.println("[RELATÓRIO] Mineração concluída com sucesso em " + getCoordenadaAtual());
     }
 }
