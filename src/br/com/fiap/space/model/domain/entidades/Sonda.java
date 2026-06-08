@@ -8,6 +8,7 @@ import br.com.fiap.space.model.domain.valueObject.Coordenadas;
 import br.com.fiap.space.model.domain.valueObject.NivelDeEnergia;
 
 public abstract class Sonda implements Recarregavel {
+    //Classe principal , tendo contrato com interface
     protected String idString;
     protected NivelDeEnergia nivelDeEnergia;
     protected Coordenadas coordenadaAtual;

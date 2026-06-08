@@ -9,6 +9,7 @@ import br.com.fiap.space.model.domain.valueObject.Coordenadas;
 import java.util.Random;
 
 public class SondaMineradora extends Sonda{
+    //classe filha de sonda
 
     private Compartimento compartimento;
     private final Random random;

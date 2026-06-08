@@ -30,7 +30,7 @@ public class TerminalSondaController {
             System.out.print("Escolha uma opção: ");
 
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpa o buffer do teclado
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1:
@@ -40,7 +40,7 @@ public class TerminalSondaController {
                     System.out.print("[ Digite 1 ] - EXPLORADORA \n[ Digite 2 ] - MINERADORA\nTipo de sonda > ");
                     String entradaTipo = scanner.nextLine().toUpperCase().trim();
 
-                    String tipo = "";
+                    String tipo = null;
 
                     // Mapeamos todas as possibilidades de digitação do usuário!
                     if (entradaTipo.equals("2") || entradaTipo.contains("MINERADORA")) {
@@ -48,7 +48,7 @@ public class TerminalSondaController {
                     } else if (entradaTipo.equals("1") || entradaTipo.contains("EXPLORADORA")) {
                         tipo = "EXPLORADORA";
                     } else {
-                        // Se digitou qualquer loucura (ex: "teste"), o sistema avisa e aborta com segurança
+
                         System.out.println(" ERRO: Tipo de sonda inválido! Digite 1 ou 2.");
                         break; // Volta para o menu principal automaticamente
                     }
@@ -59,11 +59,25 @@ public class TerminalSondaController {
                     System.out.print("Capacidade Máxima de Bateria: ");
                     double bateria = scanner.nextDouble();
 
+                    int x = 0;
                     System.out.print("Coordenada Inicial X: ");
-                    int x = scanner.nextInt();
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("ERRO: Entrada inválida! Digite apenas números inteiros");
+                        System.out.print("Coordenada Inicial X: ");
+                        scanner.next();
+                    }
+                    x = scanner.nextInt();
+                    scanner.nextLine();
 
+                    int y = 0;
                     System.out.print("Coordenada Inicial Y: ");
-                    int y = scanner.nextInt();
+                    while (!scanner.hasNextInt()) {
+                        System.out.println("ERRO: Entrada inválida! Digite apenas números inteiros");
+                        System.out.print("Coordenada Inicial Y: ");
+                        scanner.next();
+                    }
+                    y = scanner.nextInt();
+                    scanner.nextLine();
 
                     double paramEspecifico = 0;
                     if (tipo.equals("MINERADORA")) {
@@ -79,7 +93,7 @@ public class TerminalSondaController {
                             missaoService.lancarNovaSonda(tipo, id, bateria, x, y, paramEspecifico);
                             System.out.println("🟢 Sonda lançada com sucesso!");
                         } catch (IllegalArgumentException e) {
-                            System.out.println("\n❌ ALERTA DE CONFIGURAÇÃO: " + e.getMessage());
+                            System.out.println("\n ALERTA DE CONFIGURAÇÃO: " + e.getMessage());
                             System.out.println("Retornando ao menu principal para nova tentativa...\n");
                         }
 
@@ -93,8 +107,8 @@ public class TerminalSondaController {
                         List<Sonda> frotaDisponivel = missaoService.listarFrota();
 
                         if (frotaDisponivel.isEmpty()) {
-                            System.out.println("⚠️ ALERTA: Nenhuma sonda em órbita ou solo. Lance uma sonda primeiro no menu 1.");
-                            break; // Volta para o menu principal com segurança
+                            System.out.println("ALERTA: Nenhuma sonda em órbita ou solo. Lance uma sonda primeiro no menu 1.");
+                            break;
                         }
 
                     // Lista as sondas numeradas para o usuário escolher por índice
@@ -109,7 +123,7 @@ public class TerminalSondaController {
                     // Tratamento para caso o usuário digite letras no lugar do número do índice
                     try {
                         int escolhaSonda = scanner.nextInt();
-                        scanner.nextLine(); // Limpa o buffer do teclado
+                        scanner.nextLine();
 
                         // Validação do índice digitado
                         if (escolhaSonda < 1 || escolhaSonda > frotaDisponivel.size()) {
@@ -118,7 +132,7 @@ public class TerminalSondaController {
                             break; // Aborta a operação e volta ao menu
                         }
 
-                        // Puxa o ID de forma automatizada e segura
+                        // Puxa o ID de forma automatizada
                         String idBusca = frotaDisponivel.get(escolhaSonda - 1).getIdString();
 
                         // Solicita as coordenadas de destino
@@ -127,9 +141,8 @@ public class TerminalSondaController {
 
                         System.out.print("Coordenada de Destino Y: ");
                         int destY = scanner.nextInt();
-                        scanner.nextLine(); // Limpa o buffer
+                        scanner.nextLine();
 
-                        // Dispara a missão protegida contra erros internos (bateria, terreno, etc)
                         missaoService.iniciarMissaoSonda(idBusca, destX, destY);
 
                     } catch (java.util.InputMismatchException e) {
@@ -184,7 +197,7 @@ public class TerminalSondaController {
                         scanner.nextLine(); // Limpa buffer
 
                         if (escolha < 1 || escolha > frotaParaRecarga.size()) {
-                            System.out.println("❌ ERRO: Opção inválida!");
+                            System.out.println("ERRO: Opção inválida!");
                             break;
                         }
 

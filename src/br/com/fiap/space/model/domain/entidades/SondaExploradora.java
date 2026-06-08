@@ -5,6 +5,7 @@ import br.com.fiap.space.model.domain.valueObject.NivelDeEnergia;
 
 
 public class SondaExploradora extends Sonda {
+    //classe filha de sonda
     private double alcanceSensor;
 
     public SondaExploradora(String idString, NivelDeEnergia nivelDeEnergia, Coordenadas coordenadaAtual, double alcanceSensor) {

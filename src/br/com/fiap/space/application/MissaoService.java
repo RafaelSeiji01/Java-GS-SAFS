@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class MissaoService {
+    //orquestração de fluxo de dados
 
     private final BancoDeDados bancoDeDados;
     private final Random random;
