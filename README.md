@@ -36,14 +36,14 @@ br.com.fiap.space
 ├── presentation          # Interface CLI, tratamento de buffers e espias de entrada (hasNextInt)
 ├── application           # Serviços aplicativos (MissaoService) que orquestram fluxos transacionais
 └── model
-    ├── domain            # O Coração do Software (Regras imutáveis da física marciana)
-    │   ├── contract      # Contratos de interfaces de hardware (Recarregavel)
-    │   ├── entidades     # Classes com identidade (Sonda, SondaMineradora, SondaExploradora)
-    │   ├── enumeration   # Enums ricos (Terreno, Recurso) com propriedades matemáticas
-    │   ├── exceptions    # Exceções explícitas de violação de órbita e solo
-    │   └── valueObject   # Objetos imutáveis (Coordenadas, NivelDeEnergia, Compartimento)
-    ├── factory           # Fábricas isoladas para desacoplamento de criação
-    └── infrastructure    # Persistência em memória operando sob barramento Singleton
+│    ├── domain            # O Coração do Software (Regras imutáveis da física marciana)
+│    │   ├── contract      # Contratos de interfaces de hardware (Recarregavel)
+│    │   ├── entidades     # Classes com identidade (Sonda, SondaMineradora, SondaExploradora)
+│    │   ├── enumeration   # Enums ricos (Terreno, Recurso) com propriedades matemáticas
+│    │   ├── exceptions    # Exceções explícitas de violação de órbita e solo
+│    │   └── valueObject   # Objetos imutáveis (Coordenadas, NivelDeEnergia, Compartimento)
+│    └── factory           # Fábricas isoladas para desacoplamento de criação
+└── infrastructure         # Persistência em memória operando sob barramento Singleton
 ```
 ##  Integrantes do Grupo - 2ESPH
 
