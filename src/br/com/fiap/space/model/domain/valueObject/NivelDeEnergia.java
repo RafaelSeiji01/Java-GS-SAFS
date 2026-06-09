@@ -14,7 +14,7 @@ public class NivelDeEnergia {
             throw new IllegalArgumentException("Erro de Sobrecarga: A capacidade atual não pode ser maior que a capacidade máxima.");
         }
 
-        if (capacidadeAtual < 0) {
+        if (capacidadeAtual <= 0) {
             this.capacidadeAtual = 0;
         } else {
             this.capacidadeAtual = capacidadeAtual;

@@ -21,7 +21,7 @@ public class BancoDeDados {
     public void salvar(Sonda sonda) {
         bancoDeDados.removeIf(s -> s.getIdString().equalsIgnoreCase(sonda.getIdString()));
         this.bancoDeDados.add(sonda);
-        System.out.println("[BANCO DE DADOS] Sonda " + sonda.getIdString() + " salva.");
+        System.out.println(" [BANCO DE DADOS] Sonda " + sonda.getIdString() + " salva.");
     }
 
     // + buscarPorId(idSonda: String): Sonda
@@ -29,7 +29,7 @@ public class BancoDeDados {
         return this.bancoDeDados.stream()
                 .filter(s -> s.getIdString().equalsIgnoreCase(idSonda))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Erro: Sonda '" + idSonda + "' não encontrada no Banco de Dados!"));
+                .orElseThrow(() -> new RuntimeException(" [Erro] Sonda '" + idSonda + "' não encontrada no Banco de Dados!"));
     }
 
     // + listarTodas(): List<Sonda>

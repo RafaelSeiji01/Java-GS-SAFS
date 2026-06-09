@@ -47,10 +47,8 @@ public abstract class Sonda implements Recarregavel {
 
         this.nivelDeEnergia = new NivelDeEnergia(novaBateria, this.nivelDeEnergia.getCapacidadeMaxima());
         this.coordenadaAtual = destino;
-        System.out.println("[DOMÍNIO] Sonda moveu-se com sucesso pelo terreno: " + terreno);
-        System.out.println();
-        System.out.println("[ATUALIZADO]Sonda " + idString + " se moveu para " + destino + " através de terreno " + terreno + " | Energia gasta no deslocamento: " + String.format("%.2f%%", gastoTotal) + " | Bateria restante atual: " + String.format("%.2f%%", this.nivelDeEnergia.getCapacidadeAtual()));
-        System.out.println();
+        System.out.println(" [DOMÍNIO] Sonda moveu-se com sucesso pelo terreno: " + terreno);
+        System.out.println(" [ATUALIZADO] Sonda " + idString + " se moveu para " + destino + " através de terreno " + terreno + " | Energia gasta no deslocamento: " + String.format("%.2f%%", gastoTotal) + " | Bateria restante atual: " + String.format("%.2f%%", this.nivelDeEnergia.getCapacidadeAtual()));
 
     }
 
@@ -66,13 +64,13 @@ public abstract class Sonda implements Recarregavel {
 
     @Override
     public void conectarBase() {
-        System.out.println("[DOCKING STATION] Sonda " + this.idString + " acoplada com sucesso à base de solo.");
+        System.out.println(" [DOCKING STATION] Sonda " + this.idString + " acoplada com sucesso à base de solo.");
 
         // Puxa o limite máximo que a bateria dela suporta
         double maximoPermitido = this.nivelDeEnergia.getCapacidadeMaxima();
 
         this.nivelDeEnergia = new NivelDeEnergia(maximoPermitido, maximoPermitido);
 
-        System.out.println("[ENERGIA] Carga restaurada para o limite máximo de fábrica: " + maximoPermitido + "%");
+        System.out.println(" [ENERGIA] Carga restaurada para o limite máximo de fábrica: " + maximoPermitido + "%");
     }
 }

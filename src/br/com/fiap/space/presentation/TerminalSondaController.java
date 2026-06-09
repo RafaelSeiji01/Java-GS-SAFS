@@ -1,7 +1,6 @@
 package br.com.fiap.space.presentation;
 
 import br.com.fiap.space.application.MissaoService;
-import br.com.fiap.space.model.domain.entidades.Sonda;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,20 +13,31 @@ public class TerminalSondaController {
         MissaoService missaoService = new MissaoService();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("=================================================");
-        System.out.println("   SISTEMA DE CONTROLE DE MISSÃO: FIAP SPACE     ");
-        System.out.println("=================================================");
+        System.out.println("┌────────────────────────────────────────────────────────┐");
+        System.out.println("│                FIAP SPACE ORBITAL NETWORK              │");
+        System.out.println("│           SISTEMA DE CONTROLE DE MISSÃO AUTÔNOMA       │");
+        System.out.println("└────────────────────────────────────────────────────────┘");
+        System.out.println();
 
         boolean rodando = true;
 
         while (rodando) {
-            System.out.println("\n--- MENU DE OPERAÇÕES ---");
-            System.out.println("1. Lançar (Registrar) Nova Sonda");
-            System.out.println("2. Iniciar Missão de uma Sonda (Mover/Atividade)");
-            System.out.println("3. Listar Frota de Sondas Ativas");
-            System.out.println("4. Recarregar Bateria da Sonda");
-            System.out.println("5. Desconectar Terminal (Sair)");
-            System.out.print("Escolha uma opção: ");
+            System.out.println("┌────────────────────────────────────────────────────────┐");
+            System.out.println("│              SAFS - CONTROL PANEL v1.0.0               │");
+            System.out.println("├────────────────────────────────────────────────────────┤");
+            System.out.println("│  [1]   LANÇAR (REGISTRAR) NOVA SONDA                   │");
+            System.out.println("│  [2]   INICIAR MISSÃO (MOVIMENTAÇÃO / EXTRAÇÃO)        │");
+            System.out.println("│  [3]   PAINEL DE TELEMETRIA (LISTAR FROTA ATIVA)       │");
+            System.out.println("│  [4]   PROTOCOLO DE RECARGA (CONECTAR À BASE)          │");
+            System.out.println("│  [5]   DESCONECTAR TERMINAL (ENCERRAR SISTEMA)         │");
+            System.out.println("└────────────────────────────────────────────────────────┘");
+            System.out.print("COMANDANTE, DIGITE A OPERAÇÃO DESEJADA: ");
+
+            while (!scanner.hasNextInt()) {
+                System.out.println(" [ERRO] Opção inválida! Digite apenas números de 1 a 5.");
+                System.out.print("Escolha uma opção: ");
+                scanner.next();
+            }
 
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -35,9 +45,13 @@ public class TerminalSondaController {
             switch (opcao) {
                 case 1:
 
-                    System.out.println("\n[NOVO LANÇAMENTO]");
-
-                    System.out.print("[ Digite 1 ] - EXPLORADORA \n[ Digite 2 ] - MINERADORA\nTipo de sonda > ");
+                    System.out.println("┌────────────────────────────────────────────────────────┐");
+                    System.out.println("│             MÓDULO DE LANÇAMENTO DE SONDA              │");
+                    System.out.println("├────────────────────────────────────────────────────────┤");
+                    System.out.println("│  [1] EXPLORADORA (Mapeamento óptico e sensores)        │");
+                    System.out.println("│  [2] MINERADORA  (Perfuração e extração ISRU)          │");
+                    System.out.println("└────────────────────────────────────────────────────────┘");
+                    System.out.print(" [CONFIGURAÇÃO] SELECIONE O TIPO DE DIRETRIZ DA SONDA: ");
                     String entradaTipo = scanner.nextLine().toUpperCase().trim();
 
                     String tipo = null;
@@ -49,31 +63,32 @@ public class TerminalSondaController {
                         tipo = "EXPLORADORA";
                     } else {
 
-                        System.out.println(" ERRO: Tipo de sonda inválido! Digite 1 ou 2.");
-                        break; // Volta para o menu principal automaticamente
+                        System.out.println(" [ERRO] Tipo de sonda inválido! Digite 1 ou 2.");
+                        System.out.println();
+                        break;
                     }
 
-                    System.out.print("Código de Identificação (ex: SND-01): ");
+                    System.out.print(" [CONFIGURAÇÃO] Código de Identificação (ex: SND-01): ");
                     String id = scanner.nextLine();
 
-                    System.out.print("Capacidade Máxima de Bateria: ");
+                    System.out.print(" [CONFIGURAÇÃO] Capacidade Máxima de Bateria: ");
                     double bateria = scanner.nextDouble();
 
                     int x = 0;
-                    System.out.print("Coordenada Inicial X: ");
+                    System.out.print(" [CONFIGURAÇÃO] Coordenada Inicial X: ");
                     while (!scanner.hasNextInt()) {
-                        System.out.println("ERRO: Entrada inválida! Digite apenas números inteiros");
-                        System.out.print("Coordenada Inicial X: ");
+                        System.out.println(" [ERRO] Entrada inválida! Digite apenas números inteiros");
+                        System.out.print(" [CONFIGURAÇÃO] Coordenada Inicial X: ");
                         scanner.next();
                     }
                     x = scanner.nextInt();
                     scanner.nextLine();
 
                     int y = 0;
-                    System.out.print("Coordenada Inicial Y: ");
+                    System.out.print(" [CONFIGURAÇÃO] Coordenada Inicial Y: ");
                     while (!scanner.hasNextInt()) {
-                        System.out.println("ERRO: Entrada inválida! Digite apenas números inteiros");
-                        System.out.print("Coordenada Inicial Y: ");
+                        System.out.println(" [ERRO] Entrada inválida! Digite apenas números inteiros");
+                        System.out.print(" [CONFIGURAÇÃO] Coordenada Inicial Y: ");
                         scanner.next();
                     }
                     y = scanner.nextInt();
@@ -81,42 +96,52 @@ public class TerminalSondaController {
 
                     double paramEspecifico = 0;
                     if (tipo.equals("MINERADORA")) {
-                        System.out.print("Capacidade Máxima de Carga (KG): ");
+                        System.out.print(" [CONFIGURAÇÃO] Capacidade Máxima de Carga (KG): ");
                             paramEspecifico = scanner.nextDouble();
                         } else {
-                            System.out.print("Alcance do Sensor (Metros): ");
+                            System.out.print(" [CONFIGURAÇÃO] Alcance do Sensor (Metros): ");
                             paramEspecifico = scanner.nextDouble();
                         }
                         scanner.nextLine();
 
                         try {
                             missaoService.lancarNovaSonda(tipo, id, bateria, x, y, paramEspecifico);
-                            System.out.println("🟢 Sonda lançada com sucesso!");
+                            System.out.println(" [STATUS] Sonda lançada com sucesso!");
+                            System.out.println("─────────────────────────────────────────────────────────");
                         } catch (IllegalArgumentException e) {
-                            System.out.println("\n ALERTA DE CONFIGURAÇÃO: " + e.getMessage());
-                            System.out.println("Retornando ao menu principal para nova tentativa...\n");
+                            System.out.println("ALERTA DE CONFIGURAÇÃO: " + e.getMessage());
+                            System.out.println("Retornando ao menu principal para nova tentativa...");
+                            System.out.println("─────────────────────────────────────────────────────────");
                         }
 
                         break;
 
                     case 2:
 
-                        System.out.println("\n[INICIAR MISSÃO AUTÔNOMA]");
+                        System.out.println("┌────────────────────────────────────────────────────────┐");
+                        System.out.println("│               INICIAR MISSÃO AUTÔNOMA                  │");
+                        System.out.println("└────────────────────────────────────────────────────────┘");
+                        System.out.println();
 
                         // Captura a frota atual para exibição
-                        List<Sonda> frotaDisponivel = missaoService.listarFrota();
+                        List<String[]> frotaDisponivel = missaoService.listarFrotaFormatada();
 
                         if (frotaDisponivel.isEmpty()) {
-                            System.out.println("ALERTA: Nenhuma sonda em órbita ou solo. Lance uma sonda primeiro no menu 1.");
+                            System.out.println(" [ALERTA] Nenhuma sonda em órbita ou solo. Lance uma sonda primeiro no menu 1.");
                             break;
                         }
 
-                    // Lista as sondas numeradas para o usuário escolher por índice
                     System.out.println("Selecione qual sonda deseja comandar:");
-                    for (int i = 0; i < frotaDisponivel.size(); i++) {
-                        System.out.println((i + 1) + " - " + frotaDisponivel.get(i).getIdString() +
-                                " [Posição: " + frotaDisponivel.get(i).getCoordenadaAtual() + "]");
-                    }
+                        for (int i = 0; i < frotaDisponivel.size(); i++) {
+                            String[] s = frotaDisponivel.get(i);
+
+                            System.out.printf(" [%d] │ ID: %-7s │ Posição: %-12s\n",
+                                    (i + 1),
+                                    s[0],
+                                    s[1]);
+                        }
+                        System.out.println("──────────────────────────────────────────────────────────");
+                        System.out.print("Escolha o número da sonda para a ação: ");
 
                     System.out.print("Digite o número da sonda desejada: ");
 
@@ -133,7 +158,7 @@ public class TerminalSondaController {
                         }
 
                         // Puxa o ID de forma automatizada
-                        String idBusca = frotaDisponivel.get(escolhaSonda - 1).getIdString();
+                        String idBusca = frotaDisponivel.get(escolhaSonda - 1)[0];
 
                         // Solicita as coordenadas de destino
                         System.out.print("Coordenada de Destino X: ");
@@ -158,50 +183,64 @@ public class TerminalSondaController {
                     break;
 
                 case 3:
-                    System.out.println("\n[FROTA DE SONDAS EM MARTE]");
-                    List<Sonda> frota = missaoService.listarFrota();
+                    System.out.println();
+                    System.out.println("┌────────────────────────────────────────────────────────┐");
+                    System.out.println("│               FROTA DE SONDAS EM MARTE                 │");
+                    System.out.println("└────────────────────────────────────────────────────────┘");
+
+                    List<String[]> frota = missaoService.listarFrotaFormatada();
 
                     if (frota.isEmpty()) {
                         System.out.println("Nenhuma sonda orbitando ou em solo no momento.");
                     } else {
 
-                        for (Sonda s : frota) {
-                            // Puxa a capacidade atual da bateria da sonda
-                            double bateriaAtual = s.getNivelDeEnergia().getCapacidadeAtual();
-
-                            String bateriaFormatada = String.format("%.2f", bateriaAtual);
-
-                            System.out.println("- " + s.getIdString() + " | Posição: " + s.getCoordenadaAtual() + " | Bateria: " + bateriaFormatada + "%");
+                        for (String[] s : frota) {
+                            System.out.printf("ID: %-7s │ Posição: %-12s │ Bateria: %s%%\n",
+                                    s[0],
+                                    s[1],
+                                    s[2]);
                         }
+                        System.out.println("──────────────────────────────────────────────────────────");
+                        System.out.println();
                     }
                     break;
 
                 case 4:
-                    System.out.println("\n[PROTOCOLO DE RECARGA]");
-                    List<Sonda> frotaParaRecarga = missaoService.listarFrota();
+                    List<String[]> frotaParaRecarga = missaoService.listarFrotaFormatada();
 
                     if (frotaParaRecarga.isEmpty()) {
-                        System.out.println("⚠️ ALERTA: Nenhuma sonda disponível para recarga.");
+                        System.out.println(" [ALERTA] Nenhuma sonda disponível para recarga.");
                         break;
                     }
 
-                    System.out.println("Selecione qual sonda deseja trazer para a base:");
+                    System.out.println("┌────────────────────────────────────────────────────────┐");
+                    System.out.println("│               PROTOCOLO DE RECARGA DE FROTA            │");
+                    System.out.println("└────────────────────────────────────────────────────────┘");
+                    System.out.println("   Selecione qual sonda deseja trazer para a base:");
+                    System.out.println("──────────────────────────────────────────────────────────");
+
                     for (int i = 0; i < frotaParaRecarga.size(); i++) {
-                        System.out.println((i + 1) + " - " + frotaParaRecarga.get(i).getIdString() +
-                                " [Bateria Atual: " + String.format("%.2f%%", frotaParaRecarga.get(i).getNivelDeEnergia().getCapacidadeAtual()) + "]");
+                        String[] s = frotaParaRecarga.get(i);
+
+                        System.out.printf(" [%d] │ ID: %-7s │ Bateria Atual: %s%%\n",
+                                (i + 1),
+                                s[0],
+                                s[2]);
                     }
+
+                    System.out.println("──────────────────────────────────────────────────────────");
 
                     System.out.print("Digite o número da sonda: ");
                     try {
                         int escolha = scanner.nextInt();
-                        scanner.nextLine(); // Limpa buffer
+                        scanner.nextLine();
 
                         if (escolha < 1 || escolha > frotaParaRecarga.size()) {
-                            System.out.println("ERRO: Opção inválida!");
+                            System.out.println(" [ERRO] Opção inválida!");
                             break;
                         }
 
-                        String idSonda = frotaParaRecarga.get(escolha - 1).getIdString();
+                        String idSonda = frotaParaRecarga.get(escolha - 1)[0];
 
                         // Dispara o serviço de recarga que criamos acima
                         missaoService.recarregarSonda(idSonda);

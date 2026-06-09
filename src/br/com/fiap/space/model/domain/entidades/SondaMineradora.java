@@ -16,8 +16,13 @@ public class SondaMineradora extends Sonda{
 
     public SondaMineradora(String idString, NivelDeEnergia nivelDeEnergia, Coordenadas coordenadasAtual, Compartimento compartimento){
         super(idString, nivelDeEnergia, coordenadasAtual);
+
+        if (compartimento.getPesoMaximo() < 5.0 || compartimento.getPesoMaximo() > 30.0) {
+            throw new IllegalArgumentException(" [DOMÍNIO] Erro: A capacidade máxima do compartimento da Sonda Mineradora deve estar entre 5kg e 30kg.");
+        }
         this.compartimento = compartimento;
         this.random = new Random();
+
     }
 
     public Compartimento getCompartimento() {
@@ -33,7 +38,7 @@ public class SondaMineradora extends Sonda{
         // O recurso encontrado passa a ser o sorteado
         Recurso recursoEncontrado = recursosPossiveis[indiceSorteado];
 
-        System.out.println("[PERFURATRIZ] Sonda " + getIdString() + " minerando: " + recursoEncontrado.getNomeExibicao());
+        System.out.println(" [PERFURATRIZ] Sonda " + getIdString() + " minerando: " + recursoEncontrado.getNomeExibicao());
 
         double pesoExtraido = recursoEncontrado.getPesoUnidade();
         double novoPesoTotal = this.compartimento.getPesoAtual() + pesoExtraido;
@@ -45,11 +50,11 @@ public class SondaMineradora extends Sonda{
 
         this.compartimento = new Compartimento(novoPesoTotal, this.compartimento.getPesoMaximo());
 
-        System.out.println("[PRODUÇÃO] +" + pesoExtraido + "kg coletados. Carga total: " + this.compartimento);
+        System.out.println(" [PRODUÇÃO] +" + pesoExtraido + "kg coletados. Carga total: " + this.compartimento);
     }
 
     @Override
     public void enviarRelatorio() {
-        System.out.println("[RELATÓRIO] Mineração concluída com sucesso em " + getCoordenadaAtual());
+        System.out.println(" [RELATÓRIO] Mineração concluída com sucesso em " + getCoordenadaAtual());
     }
 }
