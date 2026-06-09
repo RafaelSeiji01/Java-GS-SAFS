@@ -14,6 +14,10 @@ public abstract class Sonda implements Recarregavel {
     protected Coordenadas coordenadaAtual;
 
     public Sonda(String idString,NivelDeEnergia nivelDeEnergia,Coordenadas coordenadaAtual){
+
+
+
+
         this.idString = idString;
         this.nivelDeEnergia = nivelDeEnergia;
         this.coordenadaAtual = coordenadaAtual;
@@ -40,7 +44,7 @@ public abstract class Sonda implements Recarregavel {
             throw new TerrenoInvalidoException("Falha de Navegação: Movimento abortado! Terreno do tipo CRATERA PROFUNDA é intransitável para o sistema de locomoção atual.");
         }
 
-        if (novaBateria < 0) {
+        if (novaBateria <= 0) {
             System.out.println();
             throw new BateriaCriticaException("Falha Crítica: Bateria insuficiente para mover a sonda pelo terreno " + terreno + "!");
         }

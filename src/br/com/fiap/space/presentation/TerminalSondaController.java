@@ -109,11 +109,11 @@ public class TerminalSondaController {
                             missaoService.lancarNovaSonda(tipo, id, bateria, x, y, paramEspecifico);
                             System.out.println(" [STATUS] Sonda lançada com sucesso!");
                             System.out.println("─────────────────────────────────────────────────────────");
-                        } catch (IllegalArgumentException e) {
+                         } catch (IllegalArgumentException | br.com.fiap.space.model.domain.exception.BateriaCriticaException | br.com.fiap.space.model.domain.exception.CargaExcedidaException e){
                             System.out.println("ALERTA DE CONFIGURAÇÃO: " + e.getMessage());
                             System.out.println("Retornando ao menu principal para nova tentativa...");
                             System.out.println("─────────────────────────────────────────────────────────");
-                        }
+                         }
 
                         break;
 

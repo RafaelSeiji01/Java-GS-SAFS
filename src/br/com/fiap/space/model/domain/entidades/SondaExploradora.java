@@ -30,7 +30,7 @@ public class SondaExploradora extends Sonda {
 
     @Override
     public void enviarRelatorio() {
-        System.out.println(" [RELATÓRIO ORBITAL] Enviando dados topográficos coletados na coordenada " +
+        System.out.println(" [RELATÓRIO] Enviando dados topográficos coletados na coordenada " +
                 getCoordenadaAtual() + " para o satélite de comunicação.");
     }
 }

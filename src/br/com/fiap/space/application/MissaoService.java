@@ -53,9 +53,8 @@ public class MissaoService {
     }
 
     public void iniciarMissaoSonda(String idSonda, int destinoX, int destinoY) {
-        System.out.println("└────────────────────────────────────────────────────────┘");
+        System.out.println("──────────────────────────────────────────────────────────");
         System.out.println(" [MISSAO SERVICE] Iniciando cálculo de viabilidade de rota para: " + idSonda);
-        System.out.println();
 
         try {
 
