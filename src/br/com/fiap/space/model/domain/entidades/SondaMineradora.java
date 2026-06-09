@@ -57,4 +57,13 @@ public class SondaMineradora extends Sonda{
     public void enviarRelatorio() {
         System.out.println(" [RELATÓRIO] Mineração concluída com sucesso em " + getCoordenadaAtual());
     }
+
+    @Override
+    public void conectarBase() {
+        super.conectarBase();
+        double capacidadeMaxima = this.compartimento.getPesoAtual();
+        this.compartimento = new Compartimento(0.0, compartimento.getPesoMaximo());
+
+        System.out.println(" [DESCARGA] Compartimento de carga esvaziado. Minérios transferidos para os silos da base.");
+    }
 }

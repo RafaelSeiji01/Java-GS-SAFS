@@ -64,6 +64,7 @@ public abstract class Sonda implements Recarregavel {
 
     @Override
     public void conectarBase() {
+
         System.out.println(" [DOCKING STATION] Sonda " + this.idString + " acoplada com sucesso à base de solo.");
 
         // Puxa o limite máximo que a bateria dela suporta
