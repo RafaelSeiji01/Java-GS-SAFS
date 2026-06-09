@@ -22,16 +22,20 @@ public class CentroDeComando {
     }
 
     public void registrarSonda(Sonda sonda) {
+
+        if (sonda == null || sonda.getIdString() == null || sonda.getIdString().trim().isEmpty()) {
+            throw new IllegalArgumentException("Sonda sem ID adicionado!");
+        }
+
+        for (Sonda sondaExistente : bancoDeDados.listarTodas()) {
+
+
+            if (sondaExistente.getIdString().equalsIgnoreCase(sonda.getIdString())) {
+                throw new IllegalArgumentException("O ID '" + sonda.getIdString() + "' já está em uso por outra sonda operacional!");
+            }
+        }
         bancoDeDados.salvar(sonda);
-        System.out.println("[CENTRO DE COMANDO] Sonda " + sonda.getIdString() + " integrada à frota operacional.");
-    }
-
-    public Sonda buscarSonda(String idSonda) {
-        return bancoDeDados.buscarPorId(idSonda);
-    }
-
-    public List<Sonda> listarFrota() {
-        return bancoDeDados.listarTodas();
+        System.out.println(" [CENTRO DE COMANDO] Sonda " + sonda.getIdString() + " integrada à frota operacional.");
     }
 
 }

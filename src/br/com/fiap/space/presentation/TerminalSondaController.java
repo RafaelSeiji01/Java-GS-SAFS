@@ -104,6 +104,7 @@ public class TerminalSondaController {
                         }
                         scanner.nextLine();
 
+                        //tratamento de erro
                         try {
                             missaoService.lancarNovaSonda(tipo, id, bateria, x, y, paramEspecifico);
                             System.out.println(" [STATUS] Sonda lançada com sucesso!");

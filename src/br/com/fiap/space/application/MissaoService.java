@@ -44,7 +44,8 @@ public class MissaoService {
             throw new IllegalArgumentException("Tipo de sonda desconhecido: " + tipo);
         }
 
-        bancoDeDados.salvar(novaSonda);
+        CentroDeComando centro = CentroDeComando.getInstance();
+        centro.registrarSonda(novaSonda);
     }
 
     public List<Sonda> listarFrota() {
